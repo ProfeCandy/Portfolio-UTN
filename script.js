@@ -11,7 +11,7 @@ function mostrarOcultarMenu(){
 }
 
 function seleccionar(){
-    //oculto el menu una vez que selecciono una opcion
+//oculto el menu una vez que selecciono una opcion
     document.getElementById("nav").classList = "";
     menuVisible = false;
 }
@@ -23,9 +23,9 @@ function efectoHabilidades(){
         let habilidades = document.getElementsByClassName("progreso");
         habilidades[0].classList.add("javascript");
         habilidades[1].classList.add("htmlcss");
-        habilidades[2].classList.add("photoshop");
-        habilidades[3].classList.add("wordpress");
-        habilidades[4].classList.add("drupal");
+        habilidades[2].classList.add("C");
+        habilidades[3].classList.add("Cplus");
+        habilidades[4].classList.add("SQL");
         habilidades[5].classList.add("comunicacion");
         habilidades[6].classList.add("trabajo");
         habilidades[7].classList.add("creatividad");
@@ -38,4 +38,57 @@ function efectoHabilidades(){
 //detecto el scrolling para aplicar la animacion de la barra de habilidades
 window.onscroll = function(){
     efectoHabilidades();
-} 
+}
+
+// Manejo del formulario de contacto
+document.getElementById("form-contacto").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let nombre = document.getElementById("nombre").value.trim();
+    let telefono = document.getElementById("telefono").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let tema = document.getElementById("tema").value.trim();
+    let mensaje = document.getElementById("mensaje").value.trim();
+
+// Validaciones
+    if(nombre === "" || email === "" || mensaje === ""){
+        alert("Por favor completa los campos obligatorios (Nombre, Email y Mensaje).");
+        return;
+    }
+
+    let nombreR = /^[a-zA-ZÀ-ÿ\s]+$/;
+    if(!nombreR.test(nombre)){
+    alert("El nombre solo puede contener letras y espacios.");
+    return;
+    }
+
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!emailRegex.test(email)){
+        alert("Por favor ingresa un email válido.");
+        return;
+    }
+
+    if(telefono !== "" && !/^\d{7,15}$/.test(telefono)){
+        alert("Por favor ingresa un número de teléfono válido (solo dígitos, 7-15).");
+        return;
+    }
+
+// Preparar parámetros para EmailJS
+    let templateParams = {
+        nombre: nombre,
+        email: email,
+        telefono: telefono,
+        tema: tema,
+        mensaje: mensaje
+    };
+
+    emailjs.send('service_07606d9', 'template_4obuled', templateParams)
+    .then(function(response) {
+        alert("Gracias " + nombre + ", tu mensaje fue enviado correctamente ✅");
+        document.getElementById("form-contacto").reset();
+    }, function(error) {
+        alert("Error al enviar el mensaje, intenta nuevamente 😕");
+        console.log('FAILED...', error);
+    });
+
+});
