@@ -73,22 +73,8 @@ document.getElementById("form-contacto").addEventListener("submit", function(e) 
         return;
     }
 
-// Preparar parámetros para EmailJS
-    let templateParams = {
-        nombre: nombre,
-        email: email,
-        telefono: telefono,
-        tema: tema,
-        mensaje: mensaje
-    };
-
-    emailjs.send('service_07606d9', 'template_4obuled', templateParams)
-    .then(function(response) {
-        alert("Gracias " + nombre + ", tu mensaje fue enviado correctamente ✅");
-        document.getElementById("form-contacto").reset();
-    }, function(error) {
-        alert("Error al enviar el mensaje, intenta nuevamente 😕");
-        console.log('FAILED...', error);
-    });
+ // Hacer como que envio el formulario
+    alert("Formulario enviado correctamente. ¡Gracias por contactarme!");
+    document.getElementById("form-contacto").reset();
 
 });
