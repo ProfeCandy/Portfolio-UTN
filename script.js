@@ -47,7 +47,6 @@ document.getElementById("form-contacto").addEventListener("submit", function(e) 
     let nombre = document.getElementById("nombre").value.trim();
     let telefono = document.getElementById("telefono").value.trim();
     let email = document.getElementById("email").value.trim();
-    let tema = document.getElementById("tema").value.trim();
     let mensaje = document.getElementById("mensaje").value.trim();
 
 // Validaciones
